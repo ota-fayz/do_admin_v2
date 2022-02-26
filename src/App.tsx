@@ -3,6 +3,7 @@ import Dashboard from "./pages/Dashboard"
 import { Admin, Resource, ListGuesser } from "react-admin"
 import jsonServerProvider from "ra-data-json-server"
 import authProvider from "./auth/authProvider"
+import i18nProvider from "./i18n/i18nProvider"
 
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com")
 
@@ -17,6 +18,9 @@ function App() {
 
             dataProvider={dataProvider}
             authProvider={authProvider}
+            i18nProvider={i18nProvider}
+
+
         >
             <Resource name="users" list={ListGuesser} />
         </Admin>
