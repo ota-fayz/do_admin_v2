@@ -2,6 +2,8 @@ import russianMessages from "ra-language-russian"
 
 const ruMessages = {
     ...russianMessages,
+    main: "Главная",
+    switch: "Переключить язык",
     welcome: "Добро пожаловать в администрацию",
     title: "Деканат - Панель администратора",
     language: "Язык",

@@ -2,6 +2,8 @@ import englishMessages from "ra-language-english"
 
 const enMessages = {
     ...englishMessages,
+    main: "Dashboard",
+    switch: "Switch Language",
     welcome: "Welcome to the administration",
     title: "Dean's Office - Admin Panel",
     language: "Language",
