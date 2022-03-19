@@ -1,12 +1,11 @@
 import React from "react"
 import Dashboard from "./pages/Dashboard"
-import { Admin, Resource, ListGuesser } from "react-admin"
-import jsonServerProvider from "ra-data-json-server"
+import { Admin, Resource } from "react-admin"
 import authProvider from "./auth/authProvider"
 import i18nProvider from "./i18n/i18nProvider"
 import CustomLayout from "./layour/layout"
-
-const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com")
+import dataProvider from "./http/dataProvider"
+import pattern from "./pattern"
 
 function App() {
     return (
@@ -24,7 +23,8 @@ function App() {
 
 
         >
-            <Resource name="users" list={ListGuesser} />
+            <Resource name="pattern" {...pattern} />
+            <Resource name="reference" />
         </Admin>
     )
 }

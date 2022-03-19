@@ -55,6 +55,12 @@ const ruMessages = {
                 name: "Имя",
                 role: "Роль"
             }
+        },
+        pattern: {
+            name: "Шаблон |||| Шаблоны",
+        },
+        reference: {
+            name: "Справка |||| Справки",
         }
     },
     post: {

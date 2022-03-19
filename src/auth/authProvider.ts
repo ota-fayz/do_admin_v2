@@ -4,7 +4,7 @@ import { apiUrl } from "../http/dataProvider"
 
 const authProvider = {
     login: ({ username, password }: Auth) => {
-        const request = new Request(apiUrl, {
+        const request = new Request(`${apiUrl}/token-auth/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -21,8 +21,8 @@ const authProvider = {
             .then(response => {
                 localStorage.setItem("token", response.token)
             })
-            .catch(() => {
-                throw new Error("Network error")
+            .catch(function(error) {
+                throw error
             })
     },
     logout: () => {

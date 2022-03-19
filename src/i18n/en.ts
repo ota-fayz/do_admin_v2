@@ -55,6 +55,12 @@ const enMessages = {
                 name: "Name",
                 role: "Role"
             }
+        },
+        pattern: {
+            name: "Pattern |||| Patterns",
+        },
+        reference: {
+            name: "Reference |||| References"
         }
     },
     post: {
