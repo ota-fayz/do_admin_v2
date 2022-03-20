@@ -17,47 +17,8 @@ const enMessages = {
         "create-post": "New post"
     },
     resources: {
-        posts: {
-            name: "Post |||| Posts",
-            fields: {
-                average_note: "Average note",
-                body: "Body",
-                comments: "Comments",
-                commentable: "Commentable",
-                commentable_short: "Com.",
-                created_at: "Created at",
-                notifications: "Notifications recipients",
-                nb_view: "Nb views",
-                password: "Password (if protected post)",
-                pictures: "Related Pictures",
-                published_at: "Published at",
-                teaser: "Teaser",
-                tags: "Tags",
-                title: "Title",
-                views: "Views",
-                authors: "Authors"
-            }
-        },
-        comments: {
-            name: "Comment |||| Comments",
-            fields: {
-                body: "Body",
-                created_at: "Created at",
-                post_id: "Posts",
-                author: {
-                    name: "Author"
-                }
-            }
-        },
-        users: {
-            name: "User |||| Users",
-            fields: {
-                name: "Name",
-                role: "Role"
-            }
-        },
         pattern: {
-            name: "Pattern |||| Patterns",
+            name: "Pattern |||| Patterns"
         },
         reference: {
             name: "Reference |||| References"

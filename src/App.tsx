@@ -5,7 +5,8 @@ import authProvider from "./auth/authProvider"
 import i18nProvider from "./i18n/i18nProvider"
 import CustomLayout from "./layour/layout"
 import dataProvider from "./http/dataProvider"
-import pattern from "./pattern"
+import pattern from "./patterns"
+import reference from "./references"
 
 function App() {
     return (
@@ -20,11 +21,9 @@ function App() {
             authProvider={authProvider}
             i18nProvider={i18nProvider}
             layout={CustomLayout}
-
-
         >
             <Resource name="pattern" {...pattern} />
-            <Resource name="reference" />
+            <Resource name="reference" {...reference} />
         </Admin>
     )
 }

@@ -17,47 +17,14 @@ const ruMessages = {
         "create-post": "New post"
     },
     resources: {
-        posts: {
-            name: "Post |||| Posts",
-            fields: {
-                average_note: "Average note",
-                body: "Body",
-                comments: "Comments",
-                commentable: "Commentable",
-                commentable_short: "Com.",
-                created_at: "Created at",
-                notifications: "Notifications recipients",
-                nb_view: "Nb views",
-                password: "Password (if protected post)",
-                pictures: "Related Pictures",
-                published_at: "Published at",
-                teaser: "Teaser",
-                tags: "Tags",
-                title: "Title",
-                views: "Views",
-                authors: "Authors"
-            }
-        },
-        comments: {
-            name: "Comment |||| Comments",
-            fields: {
-                body: "Body",
-                created_at: "Created at",
-                post_id: "Posts",
-                author: {
-                    name: "Author"
-                }
-            }
-        },
-        users: {
-            name: "Пользователь |||| Пользователи",
-            fields: {
-                name: "Имя",
-                role: "Роль"
-            }
-        },
         pattern: {
             name: "Шаблон |||| Шаблоны",
+            fields: {
+                id: "Идентификатор",
+                name: "Название",
+                doc_type: "Тип документа",
+                language: "Язык"
+            }
         },
         reference: {
             name: "Справка |||| Справки",

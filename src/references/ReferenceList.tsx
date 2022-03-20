@@ -1,4 +1,3 @@
-import React from "react"
 import { Children, cloneElement } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import {
@@ -9,18 +8,22 @@ import {
     SearchInput,
     ShowButton,
     TextField,
-    TextInput,
+    SelectInput,
 } from "react-admin"
 
-const patternFilter = [
+const referenceFilter = [
     <SearchInput source="q" alwaysOn />,
-    <TextInput source="language" defaultValue="Make me select" />,
+    <SelectInput allowEmpty={false} source="language" choices={[
+        { id: "ru", name: "🇺🇸" },
+        { id: "en", name: "🇷🇺" },
+        { id: "uz", name: "🇺🇿" }
+    ]} />
 ]
 
 const usePostListActionToolbarStyles = makeStyles({
     toolbar: {
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "flex-end",
         marginTop: -1,
         marginBottom: -1
     }
@@ -44,12 +47,13 @@ const PostListActionToolbar = ({ children, ...props }: any) => {
 //     return "show"
 // }
 
-const PatternList = (props: any) => {
+const ReferenceList = (props: any) => {
     return (
         <List
             {...props}
-            filters={patternFilter}
+            filters={referenceFilter}
             exporter={false}
+            bulkActionButtons={false}
         >
             <Datagrid
                 // rowClick={rowClick}
@@ -68,4 +72,4 @@ const PatternList = (props: any) => {
     )
 }
 
-export default PatternList
+export default ReferenceList
