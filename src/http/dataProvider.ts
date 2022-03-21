@@ -21,17 +21,36 @@ const dataProvider = {
 
         const query = {
             page_size: JSON.stringify(perPage),
-            page: JSON.stringify(page),
+            page: JSON.stringify(page)
         }
 
         const url = `${apiUrl}/${resource}/?${stringify(query)}`
 
+        // httpClient(url).then(({ headers, json }) => {
+        //     console.log(headers)
+        //     console.log(json.results)
+        //     return {
+        //         data: json.results,
+        //         total: json.count
+        //     }
+        // })
+
         return httpClient(url).then(
             ({ headers, json }) => ({
-            data: json.results,
-            total: json.count
-        }))
+                data: json.results,
+                total: json.count
+            }))
     },
+
+    delete: (resource: string, params: any) => (
+        //TODO: Why first req method options then delete?
+
+        httpClient(`${apiUrl}/${resource}/${params?.id}/`, {
+            method: "DELETE"
+        }).then(({ json }) => (
+            ({ data: json ?? "Success" })
+        ))
+    ),
 
     getOne: (resource: any, params: any) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
@@ -89,11 +108,6 @@ const dataProvider = {
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id }
         })),
-
-    delete: (resource: any, params: any) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: "DELETE"
-        }).then(({ json }) => ({ data: json })),
 
     deleteMany: (resource: any, params: any) => {
         const query = {

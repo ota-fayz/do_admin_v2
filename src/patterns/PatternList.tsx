@@ -6,20 +6,12 @@ import {
     EditButton,
     DeleteButton,
     List,
-    SearchInput,
     ShowButton,
     TextField,
-    SelectInput,
+    FunctionField
 } from "react-admin"
-
-const patternFilter = [
-    <SearchInput source="q" alwaysOn />,
-    <SelectInput allowEmpty={false} source="language" choices={[
-        { id: "ru", name: "🇺🇸" },
-        { id: "en", name: "🇷🇺" },
-        { id: "uz", name: "🇺🇿" }
-    ]} />
-]
+import { Filter } from "../components/filter"
+import { getFlagByLang } from "../helpers/getFlagByLang"
 
 const usePostListActionToolbarStyles = makeStyles({
     toolbar: {
@@ -48,11 +40,13 @@ const PostListActionToolbar = ({ children, ...props }: any) => {
 //     return "show"
 // }
 
+
+
 const PatternList = (props: any) => {
     return (
         <List
             {...props}
-            filters={patternFilter}
+            filters={Filter}
             exporter={false}
             bulkActionButtons={false}
         >
@@ -62,11 +56,14 @@ const PatternList = (props: any) => {
                 <TextField source="id" />
                 <TextField source="name" />
                 <TextField source="doc_type" />
-                <TextField source="language" />
+                <FunctionField
+                    label="language"
+                    render={(record: any) => getFlagByLang(record.language)}
+                />
                 <PostListActionToolbar>
                     <ShowButton />
                     <EditButton />
-                    <DeleteButton />
+                    <DeleteButton undoable={false} />
                 </PostListActionToolbar>
             </Datagrid>
         </List>

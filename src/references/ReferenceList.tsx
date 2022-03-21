@@ -9,6 +9,7 @@ import {
     ShowButton,
     TextField,
     SelectInput,
+    DateField
 } from "react-admin"
 
 const referenceFilter = [
@@ -58,10 +59,18 @@ const ReferenceList = (props: any) => {
             <Datagrid
                 // rowClick={rowClick}
             >
-                <TextField source="id" />
-                <TextField source="name" />
-                <TextField source="doc_type" />
-                <TextField source="language" />
+                <TextField source="ref_id" />
+                <TextField source="pattern_name" />
+                <DateField
+                    source="date_created"
+                    // cellClassName={classes.publishedAt}
+                />
+                <TextField source="status" />
+                <TextField source="type" />
+                <DateField
+                    source="date_closed"
+                    // cellClassName={classes.publishedAt}
+                />
                 <PostListActionToolbar>
                     <ShowButton />
                     <EditButton />
