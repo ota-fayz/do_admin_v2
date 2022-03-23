@@ -9,6 +9,7 @@ const ruMessages = {
     language: "Язык",
     english: "Английский",
     russian: "Русский",
+    uzbek: "Узбекский",
     simple: {
         action: {
             close: "Закрыть",
@@ -23,54 +24,55 @@ const ruMessages = {
                 id: "Идентификатор",
                 name: "Название",
                 doc_type: "Тип документа",
-                language: "Язык"
+                language: "Язык",
+                field_name: "Название поля",
+                static_fields: "Статические поля",
+                json_pattern: "Динамические поля"
             }
         },
         reference: {
             name: "Справка |||| Справки",
         }
     },
-    post: {
-        list: {
-            search: "Поиск"
-        },
+    pattern: {
+        // list: {
+        //     search: "Search"
+        // },
         form: {
-            summary: "Summary",
-            body: "Body",
-            miscellaneous: "Miscellaneous",
-            comments: "Comments"
+            personal: "Персональные данные",
+            course: "Детали курса",
         },
-        edit: {
-            title: "Post \"%{title}\""
+        show: {
+            title: "Шаблон \"%{title}\""
         },
-        action: {
-            save_and_edit: "Save and Edit",
-            save_and_add: "Save and Add",
-            save_and_show: "Save and Show",
-            save_with_average_note: "Save with Note"
-        }
+        // action: {
+        //     save_and_edit: "Save and Edit",
+        //     save_and_add: "Save and Add",
+        //     save_and_show: "Save and Show",
+        //     save_with_average_note: "Save with Note"
+        // }
     },
-    comment: {
-        list: {
-            about: "About"
-        }
-    },
-    user: {
-        list: {
-            search: "Search"
-        },
-        form: {
-            summary: "Summary",
-            security: "Security"
-        },
-        edit: {
-            title: "User \"%{title}\""
-        },
-        action: {
-            save_and_add: "Save and Add",
-            save_and_show: "Save and Show"
-        }
-    }
+    // comment: {
+    //     list: {
+    //         about: "About"
+    //     }
+    // },
+    // user: {
+    //     list: {
+    //         search: "Search"
+    //     },
+    //     form: {
+    //         summary: "Summary",
+    //         security: "Security"
+    //     },
+    //     edit: {
+    //         title: "User \"%{title}\""
+    //     },
+    //     action: {
+    //         save_and_add: "Save and Add",
+    //         save_and_show: "Save and Show"
+    //     }
+    // }
 }
 
 export default ruMessages

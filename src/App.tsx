@@ -5,8 +5,8 @@ import authProvider from "./auth/authProvider"
 import i18nProvider from "./i18n/i18nProvider"
 import CustomLayout from "./layour/layout"
 import dataProvider from "./http/dataProvider"
-import pattern from "./patterns"
-import reference from "./references"
+import pattern from "./pages/patterns"
+import reference from "./pages/references"
 
 function App() {
     return (

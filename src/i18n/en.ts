@@ -9,6 +9,7 @@ const enMessages = {
     language: "Language",
     english: "English",
     russian: "Russian",
+    uzbek: "Uzbek",
     simple: {
         action: {
             close: "Close",
@@ -18,53 +19,54 @@ const enMessages = {
     },
     resources: {
         pattern: {
-            name: "Pattern |||| Patterns"
+            name: "Pattern |||| Patterns",
+            fields: {
+                json_pattern: "Dynamic fields"
+            }
         },
         reference: {
             name: "Reference |||| References"
         }
     },
-    post: {
-        list: {
-            search: "Search"
-        },
+    pattern: {
+        // list: {
+        //     search: "Search"
+        // },
         form: {
-            summary: "Summary",
-            body: "Body",
-            miscellaneous: "Miscellaneous",
-            comments: "Comments"
+            personal: "Personal Detail",
+            course: "Course Detail",
         },
-        edit: {
-            title: "Post \"%{title}\""
+        show: {
+            title: "Pattern \"%{title}\""
         },
-        action: {
-            save_and_edit: "Save and Edit",
-            save_and_add: "Save and Add",
-            save_and_show: "Save and Show",
-            save_with_average_note: "Save with Note"
-        }
+        // action: {
+        //     save_and_edit: "Save and Edit",
+        //     save_and_add: "Save and Add",
+        //     save_and_show: "Save and Show",
+        //     save_with_average_note: "Save with Note"
+        // }
     },
-    comment: {
-        list: {
-            about: "About"
-        }
-    },
-    user: {
-        list: {
-            search: "Search"
-        },
-        form: {
-            summary: "Summary",
-            security: "Security"
-        },
-        edit: {
-            title: "User \"%{title}\""
-        },
-        action: {
-            save_and_add: "Save and Add",
-            save_and_show: "Save and Show"
-        }
-    }
+    // comment: {
+    //     list: {
+    //         about: "About"
+    //     }
+    // },
+    // user: {
+    //     list: {
+    //         search: "Search"
+    //     },
+    //     form: {
+    //         summary: "Summary",
+    //         security: "Security"
+    //     },
+    //     edit: {
+    //         title: "User \"%{title}\""
+    //     },
+    //     action: {
+    //         save_and_add: "Save and Add",
+    //         save_and_show: "Save and Show"
+    //     }
+    // }
 }
 
 export default enMessages

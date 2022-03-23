@@ -3,15 +3,13 @@ import { Children, cloneElement } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import {
     Datagrid,
-    EditButton,
     DeleteButton,
     List,
     ShowButton,
     TextField,
-    FunctionField
+    FunctionField, useTranslate, SearchInput, SelectInput
 } from "react-admin"
-import { Filter } from "../components/filter"
-import { getFlagByLang } from "../helpers/getFlagByLang"
+import { getFlagByLang } from "../../helpers/getFlagByLang"
 
 const usePostListActionToolbarStyles = makeStyles({
     toolbar: {
@@ -32,17 +30,18 @@ const PostListActionToolbar = ({ children, ...props }: any) => {
     )
 }
 
-// const rowClick = (id: any, basePath: any, record: any) => {
-//     if (record.commentable) {
-//         return "edit"
-//     }
-//
-//     return "show"
-// }
-
-
-
 const PatternList = (props: any) => {
+    const translate = useTranslate()
+
+    const Filter = [
+        <SearchInput source="q" alwaysOn />,
+        <SelectInput allowEmpty={false} source="language" choices={[
+            { id: "ru", name: `🇺🇸 ${translate("english")}` },
+            { id: "en", name: `🇷🇺 ${translate("russian")}` }
+            // { id: "uz", name: `🇺🇿 ${translate("uzbek")}` }
+        ]} />
+    ]
+
     return (
         <List
             {...props}
@@ -51,18 +50,20 @@ const PatternList = (props: any) => {
             bulkActionButtons={false}
         >
             <Datagrid
-                // rowClick={rowClick}
+                rowClick={() => {
+                    return "show"
+                }}
             >
-                <TextField source="id" />
-                <TextField source="name" />
-                <TextField source="doc_type" />
+                <TextField source="id" sortable={false} />
+                <TextField source="name" sortable={false} />
+                <TextField source="doc_type" sortable={false} />
                 <FunctionField
                     label="language"
                     render={(record: any) => getFlagByLang(record.language)}
+                    sortable={false}
                 />
                 <PostListActionToolbar>
                     <ShowButton />
-                    <EditButton />
                     <DeleteButton undoable={false} />
                 </PostListActionToolbar>
             </Datagrid>

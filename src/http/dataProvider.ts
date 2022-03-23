@@ -1,4 +1,9 @@
-import { fetchUtils } from "react-admin"
+import {
+    fetchUtils,
+    GetListParams,
+    DeleteParams,
+    GetOneParams
+} from "react-admin"
 import { stringify } from "query-string"
 
 export const apiUrl = "https://dev.polito.uz/api"
@@ -9,13 +14,12 @@ const httpClient = (url: string, options: any = {}) => {
         authenticated: true,
         token: `Token ${localStorage.getItem("token")}`
     }
-    return fetchUtils.fetchJson(url, options)
 
+    return fetchUtils.fetchJson(url, options)
 }
 
 const dataProvider = {
-    getList: (resource: string, params: any) => {
-        //TODO: Types for params
+    getList: (resource: string, params: GetListParams) => {
 
         const { page, perPage } = params.pagination
 
@@ -26,15 +30,6 @@ const dataProvider = {
 
         const url = `${apiUrl}/${resource}/?${stringify(query)}`
 
-        // httpClient(url).then(({ headers, json }) => {
-        //     console.log(headers)
-        //     console.log(json.results)
-        //     return {
-        //         data: json.results,
-        //         total: json.count
-        //     }
-        // })
-
         return httpClient(url).then(
             ({ headers, json }) => ({
                 data: json.results,
@@ -42,7 +37,7 @@ const dataProvider = {
             }))
     },
 
-    delete: (resource: string, params: any) => (
+    delete: (resource: string, params: DeleteParams) => (
         //TODO: Why first req method options then delete?
 
         httpClient(`${apiUrl}/${resource}/${params?.id}/`, {
@@ -52,8 +47,8 @@ const dataProvider = {
         ))
     ),
 
-    getOne: (resource: any, params: any) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+    getOne: (resource: string, params: GetOneParams) =>
+        httpClient(`${apiUrl}/${resource}/${params.id}/`).then(({ json }) => ({
             data: json
         })),
 
