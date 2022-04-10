@@ -10,6 +10,7 @@ const ruMessages = {
     english: "Английский",
     russian: "Русский",
     uzbek: "Узбекский",
+    required: "Обязательное поле",
     simple: {
         action: {
             close: "Закрыть",
@@ -45,12 +46,10 @@ const ruMessages = {
         show: {
             title: "Шаблон \"%{title}\""
         },
-        // action: {
-        //     save_and_edit: "Save and Edit",
-        //     save_and_add: "Save and Add",
-        //     save_and_show: "Save and Show",
-        //     save_with_average_note: "Save with Note"
-        // }
+        action: {
+            save_and_add: "Сохранить и Добавить",
+            save_and_show: "Сохранить и Показать",
+        }
     },
     // comment: {
     //     list: {

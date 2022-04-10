@@ -10,6 +10,7 @@ const enMessages = {
     english: "English",
     russian: "Russian",
     uzbek: "Uzbek",
+    required: "Required field",
     simple: {
         action: {
             close: "Close",
@@ -39,12 +40,10 @@ const enMessages = {
         show: {
             title: "Pattern \"%{title}\""
         },
-        // action: {
-        //     save_and_edit: "Save and Edit",
-        //     save_and_add: "Save and Add",
-        //     save_and_show: "Save and Show",
-        //     save_with_average_note: "Save with Note"
-        // }
+        action: {
+            save_and_add: "Save and Add",
+            save_and_show: "Save and Show",
+        }
     },
     // comment: {
     //     list: {

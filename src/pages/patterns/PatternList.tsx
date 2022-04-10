@@ -7,7 +7,10 @@ import {
     List,
     ShowButton,
     TextField,
-    FunctionField, useTranslate, SearchInput, SelectInput
+    FunctionField,
+    useTranslate,
+    SearchInput,
+    SelectInput
 } from "react-admin"
 import { getFlagByLang } from "../../helpers/getFlagByLang"
 
@@ -35,11 +38,15 @@ const PatternList = (props: any) => {
 
     const Filter = [
         <SearchInput source="q" alwaysOn />,
-        <SelectInput allowEmpty={false} source="language" choices={[
-            { id: "ru", name: `🇺🇸 ${translate("english")}` },
-            { id: "en", name: `🇷🇺 ${translate("russian")}` }
-            // { id: "uz", name: `🇺🇿 ${translate("uzbek")}` }
-        ]} />
+        <SelectInput
+            allowEmpty={false}
+            source="language"
+            choices={[
+                { id: "en", name: `🇺🇸 ${translate("english")}` },
+                { id: "ru", name: `🇷🇺 ${translate("russian")}` }
+                // { id: "uz", name: `🇺🇿 ${translate("uzbek")}` }
+            ]}
+        />
     ]
 
     return (
@@ -49,11 +56,7 @@ const PatternList = (props: any) => {
             exporter={false}
             bulkActionButtons={false}
         >
-            <Datagrid
-                rowClick={() => {
-                    return "show"
-                }}
-            >
+            <Datagrid rowClick="show">
                 <TextField source="id" sortable={false} />
                 <TextField source="name" sortable={false} />
                 <TextField source="doc_type" sortable={false} />

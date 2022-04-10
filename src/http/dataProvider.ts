@@ -2,7 +2,8 @@ import {
     fetchUtils,
     GetListParams,
     DeleteParams,
-    GetOneParams
+    GetOneParams,
+    CreateParams
 } from "react-admin"
 import { stringify } from "query-string"
 
@@ -52,6 +53,14 @@ const dataProvider = {
             data: json
         })),
 
+    create: (resource: string, params: CreateParams) =>
+        httpClient(`${apiUrl}/${resource}/`, {
+            method: "POST",
+            body: JSON.stringify(params.data)
+        }).then(({ json }) => ({
+            data: { ...params.data, id: json.id }
+        })),
+
     getMany: (resource: any, params: any) => {
         const query = {
             filter: JSON.stringify({ ids: params.ids })
@@ -95,14 +104,6 @@ const dataProvider = {
             body: JSON.stringify(params.data)
         }).then(({ json }) => ({ data: json }))
     },
-
-    create: (resource: any, params: any) =>
-        httpClient(`${apiUrl}/${resource}`, {
-            method: "POST",
-            body: JSON.stringify(params.data)
-        }).then(({ json }) => ({
-            data: { ...params.data, id: json.id }
-        })),
 
     deleteMany: (resource: any, params: any) => {
         const query = {
