@@ -7,7 +7,7 @@ import {
 } from "react-admin"
 import { stringify } from "query-string"
 
-export const apiUrl = "https://dev.polito.uz/api"
+export const apiUrl = "https://ref-dev.polito.uz/api/"
 
 const httpClient = (url: string, options: any = {}) => {
     //TODO: Types for options
@@ -29,7 +29,7 @@ const dataProvider = {
             page: JSON.stringify(page)
         }
 
-        const url = `${apiUrl}/${resource}/?${stringify(query)}`
+        const url = `${apiUrl}${resource}/?${stringify(query)}`
 
         return httpClient(url).then(
             ({ headers, json }) => ({
@@ -41,7 +41,7 @@ const dataProvider = {
     delete: (resource: string, params: DeleteParams) => (
         //TODO: Why first req method options then delete?
 
-        httpClient(`${apiUrl}/${resource}/${params?.id}/`, {
+        httpClient(`${apiUrl}${resource}/${params?.id}/`, {
             method: "DELETE"
         }).then(({ json }) => (
             ({ data: json ?? "Success" })
@@ -49,12 +49,12 @@ const dataProvider = {
     ),
 
     getOne: (resource: string, params: GetOneParams) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}/`).then(({ json }) => ({
+        httpClient(`${apiUrl}${resource}/${params.id}/`).then(({ json }) => ({
             data: json
         })),
 
     create: (resource: string, params: CreateParams) =>
-        httpClient(`${apiUrl}/${resource}/`, {
+        httpClient(`${apiUrl}${resource}/`, {
             method: "POST",
             body: JSON.stringify(params.data)
         }).then(({ json }) => ({
@@ -65,7 +65,7 @@ const dataProvider = {
         const query = {
             filter: JSON.stringify({ ids: params.ids })
         }
-        const url = `${apiUrl}/${resource}?${stringify(query)}`
+        const url = `${apiUrl}${resource}?${stringify(query)}`
         return httpClient(url).then(({ json }) => ({ data: json }))
     },
 
@@ -80,7 +80,7 @@ const dataProvider = {
                 [params.target]: params.id
             })
         }
-        const url = `${apiUrl}/${resource}?${stringify(query)}`
+        const url = `${apiUrl}${resource}?${stringify(query)}`
 
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
@@ -90,7 +90,7 @@ const dataProvider = {
     },
 
     update: (resource: any, params: any) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        httpClient(`${apiUrl}${resource}/${params.id}`, {
             method: "PUT",
             body: JSON.stringify(params.data)
         }).then(({ json }) => ({ data: json })),
@@ -99,7 +99,7 @@ const dataProvider = {
         const query = {
             filter: JSON.stringify({ id: params.ids })
         }
-        return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
+        return httpClient(`${apiUrl}${resource}?${stringify(query)}`, {
             method: "PUT",
             body: JSON.stringify(params.data)
         }).then(({ json }) => ({ data: json }))
@@ -109,7 +109,7 @@ const dataProvider = {
         const query = {
             filter: JSON.stringify({ id: params.ids })
         }
-        return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
+        return httpClient(`${apiUrl}${resource}?${stringify(query)}`, {
             method: "DELETE",
             body: JSON.stringify(params.data)
         }).then(({ json }) => ({ data: json }))

@@ -4,7 +4,7 @@ import { apiUrl } from "../http/dataProvider"
 
 const authProvider = {
     login: ({ username, password }: Auth) => {
-        const request = new Request(`${apiUrl}/token-auth/`, {
+        const request = new Request(`${apiUrl}token-auth/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
