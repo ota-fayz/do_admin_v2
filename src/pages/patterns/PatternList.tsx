@@ -28,7 +28,7 @@ const PostListActionToolbar = ({ children, ...props }: any) => {
 
     return (
         <div className={classes.toolbar}>
-            {Children.map(children, button => cloneElement(button, props))}
+            {Children.map(children, (button) => cloneElement(button, props))}
         </div>
     )
 }
@@ -36,15 +36,26 @@ const PostListActionToolbar = ({ children, ...props }: any) => {
 const PatternList = (props: any) => {
     const translate = useTranslate()
 
-    const Filter = [
-        <SearchInput source="q" alwaysOn />,
+    const patternFilter = [
+        <SearchInput source="search_word" alwaysOn />,
         <SelectInput
             allowEmpty={false}
             source="language"
             choices={[
+                { id: "", name: `${translate("all")}` },
                 { id: "en", name: `🇺🇸 ${translate("english")}` },
-                { id: "ru", name: `🇷🇺 ${translate("russian")}` }
-                // { id: "uz", name: `🇺🇿 ${translate("uzbek")}` }
+                { id: "ru", name: `🇷🇺 ${translate("russian")}` },
+                { id: "uz", name: `🇺🇿 ${translate("uzbek")}` }
+            ]}
+        />,
+        <SelectInput
+            allowEmpty={false}
+            source="doc_type"
+            choices={[
+                { id: "", name: "All" },
+                { id: "reference", name: "Reference" },
+                { id: "application", name: "Application" },
+                { id: "id", name: "Id" }
             ]}
         />
     ]
@@ -52,7 +63,7 @@ const PatternList = (props: any) => {
     return (
         <List
             {...props}
-            filters={Filter}
+            filters={patternFilter}
             exporter={false}
             bulkActionButtons={false}
         >
@@ -66,8 +77,8 @@ const PatternList = (props: any) => {
                     sortable={false}
                 />
                 <PostListActionToolbar>
-                    <ShowButton />
-                    <DeleteButton undoable={false} />
+                    <ShowButton label="" />
+                    <DeleteButton label="" undoable={false} />
                 </PostListActionToolbar>
             </Datagrid>
         </List>
