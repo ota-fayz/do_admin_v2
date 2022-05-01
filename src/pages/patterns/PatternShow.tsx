@@ -8,8 +8,10 @@ import {
     TextField,
     useShowController,
     useLocale,
-    FunctionField
+    FunctionField,
+    useTranslate
 } from "react-admin"
+import { Grid } from "@material-ui/core/"
 import { PatternTitle } from "./PatternTitle"
 import { getFlagByLang } from "../../helpers/getFlagByLang"
 import React from "react"
@@ -17,6 +19,7 @@ import React from "react"
 const PatternShow = (props: any) => {
     const controllerProps = useShowController(props)
     const locale = useLocale()
+    const translate = useTranslate()
 
     return (
         <ShowContextProvider value={controllerProps}>
@@ -28,31 +31,44 @@ const PatternShow = (props: any) => {
                         <TextField source="doc_type" />
                         <FunctionField
                             label="language"
-                            render={(record: any) => getFlagByLang(record.language)}
+                            render={(record: any) =>
+                                getFlagByLang(record.language)
+                            }
                         />
-                        <ArrayField source="static_fields">
-                            <Datagrid>
-                                <TextField
-                                    label=""
-                                    source={locale === "ru" ? "label.ru" : "label.en"}
-                                />
-                            </Datagrid>
-                        </ArrayField>
+                        <Grid container>
+                            <Grid sm item>
+                                <ArrayField source="static_fields">
+                                    <Datagrid>
+                                        <TextField
+                                            label={translate("static_fields")}
+                                            source={
+                                                locale === "ru"
+                                                    ? "label.ru"
+                                                    : "label.en"
+                                            }
+                                        />
+                                    </Datagrid>
+                                </ArrayField>
+                            </Grid>
+                            <Grid sm item>
+                                <ArrayField source="json_pattern">
+                                    <Datagrid>
+                                        <TextField
+                                            label={translate("json_pattern")}
+                                            source="label"
+                                        />
+                                        <TextField
+                                            label={translate("type")}
+                                            source="type"
+                                        />
+                                    </Datagrid>
+                                </ArrayField>
+                            </Grid>
+                        </Grid>
                     </Tab>
-                    <Tab label="pattern.form.course">
-                        <ArrayField source="json_pattern">
-                            <Datagrid>
-                                <TextField
-                                    label=""
-                                    source="label"
-                                />
-                                <TextField
-                                    label=""
-                                    source="type"
-                                />
-                            </Datagrid>
-                        </ArrayField>
-                    </Tab>
+                    {/*<Tab label="pattern.form.course">*/}
+                    {/*    */}
+                    {/*</Tab>*/}
                 </TabbedShowLayout>
             </ShowView>
         </ShowContextProvider>

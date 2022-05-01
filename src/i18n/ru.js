@@ -18,6 +18,9 @@ const ruMessages = {
     label: "Поле",
     value: "Значение",
     all: "Все",
+    type: "Тип",
+    static_fields: "Постоянные поля",
+    json_pattern: "Пользовательские поля",
     simple: {
         action: {
             close: "Закрыть",
@@ -34,8 +37,8 @@ const ruMessages = {
                 doc_type: "Тип документа",
                 language: "Язык",
                 field_name: "Название поля",
-                static_fields: "Статические поля",
-                json_pattern: "Динамические поля"
+                static_fields: "Постоянные поля",
+                json_pattern: "Пользовательские поля"
             }
         },
         reference: {
@@ -66,8 +69,8 @@ const ruMessages = {
         //     search: "Search"
         // },
         form: {
-            personal: "Персональные данные",
-            course: "Детали курса"
+            personal: "Общая информация",
+            course: "Поля для заполнения"
         },
         show: {
             title: 'Шаблон "%{title}"'
@@ -83,7 +86,7 @@ const ruMessages = {
         // },
         form: {
             personal: "Персональные данные",
-            course: "Детали курса"
+            course: "Детали документа"
         },
         show: {
             title: 'Справка "%{title}"'
