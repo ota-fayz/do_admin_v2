@@ -1,24 +1,41 @@
-import { Children, cloneElement } from "react"
+import React, { Children, cloneElement } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import {
     Datagrid,
-    EditButton,
-    DeleteButton,
     List,
-    SearchInput,
     ShowButton,
     TextField,
-    SelectInput,
-    DateField
+    DateField,
+    FunctionField,
+    SearchInput,
+    SelectInput
 } from "react-admin"
+import { getFlagByLang } from "../../helpers/getFlagByLang"
+import { getStatus } from "../../helpers/getStatus"
 
 const referenceFilter = [
-    <SearchInput source="q" alwaysOn />,
-    <SelectInput allowEmpty={false} source="language" choices={[
-        { id: "ru", name: "🇺🇸" },
-        { id: "en", name: "🇷🇺" },
-        { id: "uz", name: "🇺🇿" }
-    ]} />
+    <SearchInput source="search_word" alwaysOn />,
+    <SelectInput
+        allowEmpty={false}
+        source="status"
+        choices={[
+            { id: "", name: "All" },
+            { id: 0, name: "Awaiting" },
+            { id: 1, name: "Ready" },
+            { id: 2, name: "Canceled" },
+            { id: 3, name: "Deleted" }
+        ]}
+    />,
+    <SelectInput
+        allowEmpty={false}
+        source="doc_type"
+        choices={[
+            { id: "", name: "All" },
+            { id: "reference", name: "Reference" },
+            { id: "application", name: "Application" },
+            { id: "id", name: "Id" }
+        ]}
+    />
 ]
 
 const usePostListActionToolbarStyles = makeStyles({
@@ -30,23 +47,17 @@ const usePostListActionToolbarStyles = makeStyles({
     }
 })
 
-const PostListActionToolbar = ({ children, ...props }: any) => {
+const ReferenceListActionToolbar = ({ children, ...props }: any) => {
     const classes = usePostListActionToolbarStyles()
 
     return (
         <div className={classes.toolbar}>
-            {Children.map(children, button => cloneElement(button, props))}
+            {Children.map(children, (button) => {
+                return cloneElement(button, props)
+            })}
         </div>
     )
 }
-
-// const rowClick = (id: any, basePath: any, record: any) => {
-//     if (record.commentable) {
-//         return "edit"
-//     }
-//
-//     return "show"
-// }
 
 const ReferenceList = (props: any) => {
     return (
@@ -56,26 +67,29 @@ const ReferenceList = (props: any) => {
             exporter={false}
             bulkActionButtons={false}
         >
-            <Datagrid
-                // rowClick={rowClick}
-            >
-                <TextField source="ref_id" />
-                <TextField source="pattern_name" />
-                <DateField
-                    source="date_created"
-                    // cellClassName={classes.publishedAt}
+            <Datagrid rowClick="show">
+                <TextField source="id" sortable={false} />
+                <TextField source="pattern_name" sortable={false} />
+                <TextField source="identity_string" sortable={false} />
+                <TextField source="first_name" sortable={false} />
+                <TextField source="last_name" sortable={false} />
+                <DateField source="date_created" sortable={false} />
+                <FunctionField
+                    label="language"
+                    render={(record: any) => getFlagByLang(record.pattern_lang)}
+                    sortable={false}
                 />
-                <TextField source="status" />
-                <TextField source="type" />
-                <DateField
-                    source="date_closed"
-                    // cellClassName={classes.publishedAt}
+                <FunctionField
+                    label="status"
+                    render={(record: any) => getStatus(record.status)}
+                    sortable={false}
                 />
-                <PostListActionToolbar>
-                    <ShowButton />
-                    <EditButton />
-                    <DeleteButton />
-                </PostListActionToolbar>
+                <TextField source="type" sortable={false} />
+                <DateField source="date_closed" sortable={false} />
+                <ReferenceListActionToolbar>
+                    <ShowButton label="" />
+                    {/*<DeleteButton undoable={false} label="" />*/}
+                </ReferenceListActionToolbar>
             </Datagrid>
         </List>
     )

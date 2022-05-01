@@ -7,10 +7,17 @@ const ruMessages = {
     welcome: "Добро пожаловать в администрацию",
     title: "Деканат - Панель администратора",
     language: "Язык",
+    status: "Статус",
     english: "Английский",
     russian: "Русский",
     uzbek: "Узбекский",
     required: "Обязательное поле",
+    download: "Скачать",
+    images: "Фото",
+    files: "Файлы",
+    label: "Поле",
+    value: "Значение",
+    all: "Все",
     simple: {
         action: {
             close: "Закрыть",
@@ -22,7 +29,7 @@ const ruMessages = {
         pattern: {
             name: "Шаблон |||| Шаблоны",
             fields: {
-                id: "Идентификатор",
+                id: "ID",
                 name: "Название",
                 doc_type: "Тип документа",
                 language: "Язык",
@@ -33,6 +40,25 @@ const ruMessages = {
         },
         reference: {
             name: "Справка |||| Справки",
+            fields: {
+                id: "ID",
+                pattern_name: "Название шаблона",
+                date_created: "Дата открытия",
+                date_closed: "Дата закрытия",
+                status: "Статус",
+                type: "Тип документа",
+                doc_type: "Тип документа",
+                identity_string: "ID студента",
+                first_name: "Имя",
+                last_name: "Фамилия",
+                ref: {
+                    pattern: {
+                        name: "Название шаблона"
+                    },
+                    images: "Фото",
+                    files: "Файлы"
+                }
+            }
         }
     },
     pattern: {
@@ -41,16 +67,32 @@ const ruMessages = {
         // },
         form: {
             personal: "Персональные данные",
-            course: "Детали курса",
+            course: "Детали курса"
         },
         show: {
-            title: "Шаблон \"%{title}\""
+            title: 'Шаблон "%{title}"'
         },
         action: {
             save_and_add: "Сохранить и Добавить",
-            save_and_show: "Сохранить и Показать",
+            save_and_show: "Сохранить и Показать"
         }
     },
+    reference: {
+        // list: {
+        //     search: "Search"
+        // },
+        form: {
+            personal: "Персональные данные",
+            course: "Детали курса"
+        },
+        show: {
+            title: 'Справка "%{title}"'
+        },
+        action: {
+            save_and_add: "Сохранить и Добавить",
+            save_and_show: "Сохранить и Показать"
+        }
+    }
     // comment: {
     //     list: {
     //         about: "About"
@@ -75,4 +117,3 @@ const ruMessages = {
 }
 
 export default ruMessages
-

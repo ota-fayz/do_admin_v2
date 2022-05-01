@@ -3,7 +3,8 @@ import {
     GetListParams,
     DeleteParams,
     GetOneParams,
-    CreateParams
+    CreateParams,
+    UpdateParams
 } from "react-admin"
 import { stringify } from "query-string"
 
@@ -21,32 +22,32 @@ const httpClient = (url: string, options: any = {}) => {
 
 const dataProvider = {
     getList: (resource: string, params: GetListParams) => {
-
         const { page, perPage } = params.pagination
+        const { doc_type, status, search_word, language } = params.filter
 
         const query = {
             page_size: JSON.stringify(perPage),
-            page: JSON.stringify(page)
+            page: JSON.stringify(page),
+            doc_type,
+            status,
+            search_word,
+            language
         }
 
         const url = `${apiUrl}${resource}/?${stringify(query)}`
 
-        return httpClient(url).then(
-            ({ headers, json }) => ({
-                data: json.results,
-                total: json.count
-            }))
+        return httpClient(url).then(({ headers, json }) => ({
+            data: json.results,
+            total: json.count
+        }))
     },
 
-    delete: (resource: string, params: DeleteParams) => (
+    delete: (resource: string, params: DeleteParams) =>
         //TODO: Why first req method options then delete?
 
         httpClient(`${apiUrl}${resource}/${params?.id}/`, {
             method: "DELETE"
-        }).then(({ json }) => (
-            ({ data: json ?? "Success" })
-        ))
-    ),
+        }).then(({ json }) => ({ data: json ?? "Success" })),
 
     getOne: (resource: string, params: GetOneParams) =>
         httpClient(`${apiUrl}${resource}/${params.id}/`).then(({ json }) => ({
@@ -60,6 +61,12 @@ const dataProvider = {
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id }
         })),
+
+    update: (resource: string, params: UpdateParams) =>
+        httpClient(`${apiUrl}${resource}/${params.id}/`, {
+            method: "PATCH",
+            body: JSON.stringify(params.data)
+        }).then(({ json }) => ({ data: json })),
 
     getMany: (resource: any, params: any) => {
         const query = {
@@ -88,12 +95,6 @@ const dataProvider = {
             // total: parseInt(headers.get("content-range").split("/").pop(), 10)
         }))
     },
-
-    update: (resource: any, params: any) =>
-        httpClient(`${apiUrl}${resource}/${params.id}`, {
-            method: "PUT",
-            body: JSON.stringify(params.data)
-        }).then(({ json }) => ({ data: json })),
 
     updateMany: (resource: any, params: any) => {
         const query = {

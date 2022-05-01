@@ -1,11 +1,13 @@
-import DescriptionIcon from '@material-ui/icons/Description';
+import DescriptionIcon from "@material-ui/icons/Description"
 import ReferenceList from "./ReferenceList"
+import ReferenceShow from "./ReferenceShow"
+import ReferenceEdit from "./ReferenceEdit"
 
 const reference = {
     list: ReferenceList,
     // create: PostCreate,
-    // edit: PostEdit,
-    // show: PostShow,
+    edit: ReferenceEdit,
+    show: ReferenceShow,
     icon: DescriptionIcon
 }
 
