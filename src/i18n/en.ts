@@ -18,6 +18,9 @@ const enMessages = {
     label: "Label",
     value: "Value",
     all: "All",
+    type: "Type",
+    static_fields: "Constant fields",
+    json_pattern: "Dynamic fields",
     simple: {
         action: {
             close: "Close",
@@ -29,6 +32,8 @@ const enMessages = {
         pattern: {
             name: "Pattern |||| Patterns",
             fields: {
+                id: "ID",
+                static_fields: "Constant fields",
                 json_pattern: "Dynamic fields"
             }
         },
@@ -59,8 +64,8 @@ const enMessages = {
         //     search: "Search"
         // },
         form: {
-            personal: "Personal Detail",
-            course: "Course Detail"
+            personal: "General Info",
+            course: "Fields Detail"
         },
         show: {
             title: 'Pattern "%{title}"'
@@ -75,8 +80,8 @@ const enMessages = {
         //     search: "Search"
         // },
         form: {
-            personal: "Personal Detail",
-            course: "Course Detail"
+            personal: "General Info",
+            course: "Document detail"
         },
         show: {
             title: 'Reference "%{title}"'
