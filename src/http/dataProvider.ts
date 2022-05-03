@@ -36,7 +36,7 @@ const dataProvider = {
 
         const url = `${apiUrl}${resource}/?${stringify(query)}`
 
-        return httpClient(url).then(({ headers, json }) => ({
+        return httpClient(url).then(({ json }) => ({
             data: json.results,
             total: json.count
         }))
@@ -54,13 +54,29 @@ const dataProvider = {
             data: json
         })),
 
-    create: (resource: string, params: CreateParams) =>
-        httpClient(`${apiUrl}${resource}/`, {
+    create: (resource: string, params: CreateParams) => {
+        const formData = new FormData()
+        const { data } = params
+
+        for (const key in data) {
+            if (key !== "pattern_file") {
+                formData.append(key, data[key])
+            } else {
+                formData.append(key, data[key].rawFile)
+            }
+        }
+
+        return httpClient(`${apiUrl}${resource}/`, {
             method: "POST",
-            body: JSON.stringify(params.data)
-        }).then(({ json }) => ({
-            data: { ...params.data, id: json.id }
-        })),
+            body: formData
+        }).then(({ json }) => ({ data: { ...params.data, id: json.id } }))
+    },
+
+    // create: (resource: string, params: CreateParams) =>
+    //     httpClient(`${apiUrl}${resource}/`, {
+    //         method: "POST",
+    //         body: JSON.stringify(params.data)
+    //     }).then(({ json }) => ({ data: { ...params.data, id: json.id } })),
 
     update: (resource: string, params: UpdateParams) =>
         httpClient(`${apiUrl}${resource}/${params.id}/`, {
@@ -89,7 +105,7 @@ const dataProvider = {
         }
         const url = `${apiUrl}${resource}?${stringify(query)}`
 
-        return httpClient(url).then(({ headers, json }) => ({
+        return httpClient(url).then(({ json }) => ({
             data: json,
             total: 10
             // total: parseInt(headers.get("content-range").split("/").pop(), 10)

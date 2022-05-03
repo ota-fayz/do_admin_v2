@@ -17,10 +17,15 @@ const enMessages = {
     files: "Files",
     label: "Label",
     value: "Value",
-    all: "All",
     type: "Type",
     static_fields: "Constant fields",
     json_pattern: "Dynamic fields",
+    all: "All",
+    awaiting: "Awaiting",
+    ready: "Ready",
+    canceled: "Canceled",
+    deleted: "Deleted",
+    word: "Word-Template",
     simple: {
         action: {
             close: "Close",

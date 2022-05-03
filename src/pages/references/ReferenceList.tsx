@@ -8,35 +8,11 @@ import {
     DateField,
     FunctionField,
     SearchInput,
-    SelectInput
+    SelectInput,
+    useTranslate
 } from "react-admin"
 import { getFlagByLang } from "../../helpers/getFlagByLang"
 import { getStatus } from "../../helpers/getStatus"
-
-const referenceFilter = [
-    <SearchInput source="search_word" alwaysOn />,
-    <SelectInput
-        allowEmpty={false}
-        source="status"
-        choices={[
-            { id: "", name: "All" },
-            { id: 0, name: "Awaiting" },
-            { id: 1, name: "Ready" },
-            { id: 2, name: "Canceled" },
-            { id: 3, name: "Deleted" }
-        ]}
-    />,
-    <SelectInput
-        allowEmpty={false}
-        source="doc_type"
-        choices={[
-            { id: "", name: "All" },
-            { id: "reference", name: "Reference" },
-            { id: "application", name: "Application" },
-            { id: "id", name: "Id" }
-        ]}
-    />
-]
 
 const usePostListActionToolbarStyles = makeStyles({
     toolbar: {
@@ -60,6 +36,32 @@ const ReferenceListActionToolbar = ({ children, ...props }: any) => {
 }
 
 const ReferenceList = (props: any) => {
+    const translate = useTranslate()
+
+    const referenceFilter = [
+        <SearchInput source="search_word" alwaysOn />,
+        <SelectInput
+            allowEmpty={false}
+            source="status"
+            choices={[
+                { id: "", name: `${translate("all")}` },
+                { id: 0, name: `${translate("awaiting")}` },
+                { id: 1, name: `${translate("ready")}` },
+                { id: 2, name: `${translate("canceled")}` },
+                { id: 3, name: `${translate("deleted")}` }
+            ]}
+        />,
+        <SelectInput
+            allowEmpty={false}
+            source="doc_type"
+            choices={[
+                { id: "", name: "All" },
+                { id: "reference", name: "Reference" },
+                { id: "application", name: "Application" },
+                { id: "id", name: "Id" }
+            ]}
+        />
+    ]
     return (
         <List
             {...props}
@@ -81,7 +83,9 @@ const ReferenceList = (props: any) => {
                 />
                 <FunctionField
                     label="status"
-                    render={(record: any) => getStatus(record.status)}
+                    render={(record: any) =>
+                        getStatus(record.status, translate)
+                    }
                     sortable={false}
                 />
                 <TextField source="type" sortable={false} />
