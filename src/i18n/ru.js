@@ -17,10 +17,15 @@ const ruMessages = {
     files: "Файлы",
     label: "Поле",
     value: "Значение",
-    all: "Все",
     type: "Тип",
     static_fields: "Постоянные поля",
     json_pattern: "Пользовательские поля",
+    all: "Все",
+    awaiting: "Ожидание",
+    ready: "Готово",
+    canceled: "Отменено",
+    deleted: "Удалено",
+    word: "Word-Шаблон",
     simple: {
         action: {
             close: "Закрыть",

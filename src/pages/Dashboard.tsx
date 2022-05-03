@@ -8,7 +8,9 @@ export default function Dashboard() {
     return (
         <Card>
             <Title title={translate("main")} />
-            <CardContent>{translate("welcome")}</CardContent>
+            <CardContent>
+                <h1>{translate("welcome")}</h1>
+            </CardContent>
         </Card>
     )
 }

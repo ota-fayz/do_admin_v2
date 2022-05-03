@@ -19,6 +19,7 @@ import { getFlagByLang } from "../../helpers/getFlagByLang"
 import { ReferenceTitle } from "./ReferenceTitle"
 import { getStatus } from "../../helpers/getStatus"
 import CustomUrlField from "../../components/CustomUrlField"
+import { useStyles } from "../../styles/useStyles"
 
 const referenceRowStyle = () => ({
     height: "42px"
@@ -39,6 +40,7 @@ const ReferenceShowActions = ({ basePath, data }: any) => {
 const ReferenceShow = (props: any) => {
     const controllerProps = useShowController(props)
     const translate = useTranslate()
+    const classes = useStyles()
 
     return (
         <ShowContextProvider value={controllerProps}>
@@ -55,7 +57,9 @@ const ReferenceShow = (props: any) => {
                         <TextField source="last_name" />
                         <FunctionField
                             label="status"
-                            render={(record: any) => getStatus(record.status)}
+                            render={(record: any) =>
+                                getStatus(record.status, translate)
+                            }
                         />
                         <DateField showTime source="date_created" />
                         <DateField
@@ -77,7 +81,7 @@ const ReferenceShow = (props: any) => {
                                 label={translate("download")}
                                 source="ref.ref"
                             />
-                            <Grid container>
+                            <Grid container className={classes.container}>
                                 <Grid sm item>
                                     <ArrayField source="ref.pattern.json_pattern">
                                         <Datagrid rowStyle={referenceRowStyle}>

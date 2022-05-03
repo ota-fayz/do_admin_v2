@@ -15,11 +15,13 @@ import { Grid } from "@material-ui/core/"
 import { PatternTitle } from "./PatternTitle"
 import { getFlagByLang } from "../../helpers/getFlagByLang"
 import React from "react"
+import { useStyles } from "../../styles/useStyles"
 
 const PatternShow = (props: any) => {
     const controllerProps = useShowController(props)
     const locale = useLocale()
     const translate = useTranslate()
+    const classes = useStyles()
 
     return (
         <ShowContextProvider value={controllerProps}>
@@ -35,7 +37,7 @@ const PatternShow = (props: any) => {
                                 getFlagByLang(record.language)
                             }
                         />
-                        <Grid container>
+                        <Grid container className={classes.container}>
                             <Grid sm item>
                                 <ArrayField source="static_fields">
                                     <Datagrid>
