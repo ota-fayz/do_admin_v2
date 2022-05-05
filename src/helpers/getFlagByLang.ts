@@ -7,6 +7,6 @@ export const getFlagByLang = (lang: string): string => {
         case "uz":
             return "🇺🇿"
         default:
-            return ""
+            return "-"
     }
 }

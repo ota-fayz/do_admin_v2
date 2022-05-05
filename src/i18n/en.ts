@@ -26,6 +26,7 @@ const enMessages = {
     canceled: "Canceled",
     deleted: "Deleted",
     word: "Word-Template",
+    name: "Name",
     simple: {
         action: {
             close: "Close",
@@ -46,6 +47,9 @@ const enMessages = {
             name: "Reference |||| References",
             fields: {
                 id: "ID",
+                pattern_name: "Pattern name",
+                first_name: "First name",
+                last_name: "Last name",
                 status: "Status",
                 identity_string: "Student ID",
                 doc_type: "Type",

@@ -26,6 +26,7 @@ const ruMessages = {
     canceled: "Отменено",
     deleted: "Удалено",
     word: "Word-Шаблон",
+    name: "Название",
     simple: {
         action: {
             close: "Закрыть",
