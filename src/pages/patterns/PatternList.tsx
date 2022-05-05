@@ -13,6 +13,7 @@ import {
     SelectInput
 } from "react-admin"
 import { getFlagByLang } from "../../helpers/getFlagByLang"
+import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter"
 
 const usePostListActionToolbarStyles = makeStyles({
     toolbar: {
@@ -69,7 +70,11 @@ const PatternList = (props: any) => {
         >
             <Datagrid rowClick="show">
                 <TextField source="id" sortable={false} />
-                <TextField source="name" sortable={false} />
+                <FunctionField
+                    label="name"
+                    render={(record: any) => capitalizeFirstLetter(record.name)}
+                    sortable={false}
+                />
                 <TextField source="doc_type" sortable={false} />
                 <FunctionField
                     label="language"

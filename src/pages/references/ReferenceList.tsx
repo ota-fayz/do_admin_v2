@@ -13,6 +13,8 @@ import {
 } from "react-admin"
 import { getFlagByLang } from "../../helpers/getFlagByLang"
 import { getStatus } from "../../helpers/getStatus"
+import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter"
+import { cutOffString } from "../../helpers/cutOffString"
 
 const usePostListActionToolbarStyles = makeStyles({
     toolbar: {
@@ -71,10 +73,34 @@ const ReferenceList = (props: any) => {
         >
             <Datagrid rowClick="show">
                 <TextField source="id" sortable={false} />
-                <TextField source="pattern_name" sortable={false} />
-                <TextField source="identity_string" sortable={false} />
-                <TextField source="first_name" sortable={false} />
-                <TextField source="last_name" sortable={false} />
+                <FunctionField
+                    label="resources.reference.fields.pattern_name"
+                    render={(record: any) =>
+                        cutOffString(capitalizeFirstLetter(record.pattern_name))
+                    }
+                    sortable={false}
+                />
+                <FunctionField
+                    label="resources.reference.fields.identity_string"
+                    render={(record: any) =>
+                        record.identity_string.toLowerCase()
+                    }
+                    sortable={false}
+                />
+                <FunctionField
+                    label="resources.reference.fields.first_name"
+                    render={(record: any) =>
+                        capitalizeFirstLetter(record.first_name)
+                    }
+                    sortable={false}
+                />
+                <FunctionField
+                    label="resources.reference.fields.last_name"
+                    render={(record: any) =>
+                        capitalizeFirstLetter(record.last_name)
+                    }
+                    sortable={false}
+                />
                 <DateField source="date_created" sortable={false} />
                 <FunctionField
                     label="language"
@@ -89,10 +115,13 @@ const ReferenceList = (props: any) => {
                     sortable={false}
                 />
                 <TextField source="type" sortable={false} />
-                <DateField source="date_closed" sortable={false} />
+                <DateField
+                    emptyText="-"
+                    source="date_closed"
+                    sortable={false}
+                />
                 <ReferenceListActionToolbar>
                     <ShowButton label="" />
-                    {/*<DeleteButton undoable={false} label="" />*/}
                 </ReferenceListActionToolbar>
             </Datagrid>
         </List>
