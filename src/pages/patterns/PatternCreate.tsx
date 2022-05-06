@@ -11,7 +11,7 @@ import {
     ArrayInput,
     SimpleFormIterator
 } from "react-admin"
-import React from "react"
+import React, { useState } from "react"
 import { useStyles } from "../../styles/useStyles"
 
 const PostCreateToolbar = (props: any) => {
@@ -37,6 +37,7 @@ const PostCreateToolbar = (props: any) => {
 
 const PatternCreate = ({ ...props }: any) => {
     const translate = useTranslate()
+    const [arrOfFiles, setArrOfFiles] = useState([])
 
     const validations = (values: any) => {
         const adData = "additional_data"
@@ -52,6 +53,7 @@ const PatternCreate = ({ ...props }: any) => {
             }
         })
         if (Array.isArray(values[adData])) {
+            setArrOfFiles(values[adData])
             values[adData].map((el: any) => {
                 if (!el) {
                     errors[adData].push(obj)
@@ -92,7 +94,10 @@ const PatternCreate = ({ ...props }: any) => {
                     ]}
                 />
                 <ArrayInput source="additional_data">
-                    <SimpleFormIterator disableReordering>
+                    <SimpleFormIterator
+                        disableAdd={arrOfFiles.length === 4}
+                        disableReordering
+                    >
                         <TextInput isRequired source="label" />
                         <SelectInput
                             isRequired
