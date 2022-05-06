@@ -7,9 +7,11 @@ import {
     FileInput,
     FileField,
     useTranslate,
-    SelectInput
+    SelectInput,
+    ArrayInput,
+    SimpleFormIterator
 } from "react-admin"
-import React from "react"
+import React, { useState } from "react"
 import { useStyles } from "../../styles/useStyles"
 
 const PostCreateToolbar = (props: any) => {
@@ -35,14 +37,29 @@ const PostCreateToolbar = (props: any) => {
 
 const PatternCreate = ({ ...props }: any) => {
     const translate = useTranslate()
+    const [arrOfFiles, setArrOfFiles] = useState([])
 
     const validations = (values: any) => {
+        const adData = "additional_data"
+        const obj = {
+            label: translate("required"),
+            type: translate("required")
+        }
         const errors = {} as any
         ;["name", "pattern_file", "language", "doc_type"].forEach((field) => {
             if (!values[field]) {
                 errors[field] = translate("required")
             }
         })
+        if (Array.isArray(values[adData])) {
+            errors[adData] = []
+            setArrOfFiles(values[adData])
+            values[adData].forEach((field: any, index: number) => {
+                if (!field) {
+                    errors[adData][index] = obj
+                }
+            })
+        }
         return errors
     }
 
@@ -53,12 +70,14 @@ const PatternCreate = ({ ...props }: any) => {
                     source="pattern_file"
                     label={translate("word")}
                     accept=".doc,.docx"
+                    isRequired
                 >
                     <FileField source="src" title="title" />
                 </FileInput>
-                <TextInput source="name" />
+                <TextInput isRequired source="name" />
                 <SelectInput
                     source="doc_type"
+                    isRequired
                     choices={[
                         { id: "reference", name: "Reference" },
                         { id: "application", name: "Application" },
@@ -67,12 +86,35 @@ const PatternCreate = ({ ...props }: any) => {
                 />
                 <SelectInput
                     source="language"
+                    isRequired
                     choices={[
                         { id: "en", name: `🇺🇸 ${translate("english")}` },
                         { id: "ru", name: `🇷🇺 ${translate("russian")}` },
                         { id: "uz", name: `🇺🇿 ${translate("uzbek")}` }
                     ]}
                 />
+                <ArrayInput source="additional_data">
+                    <SimpleFormIterator
+                        disableAdd={arrOfFiles.length === 4}
+                        disableReordering
+                    >
+                        <TextInput isRequired source="label" />
+                        <SelectInput
+                            isRequired
+                            source="type"
+                            choices={[
+                                {
+                                    id: "file",
+                                    name: translate("file")
+                                },
+                                {
+                                    id: "image",
+                                    name: translate("image")
+                                }
+                            ]}
+                        />
+                    </SimpleFormIterator>
+                </ArrayInput>
             </SimpleForm>
         </Create>
     )
