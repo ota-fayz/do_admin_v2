@@ -27,6 +27,8 @@ const enMessages = {
     deleted: "Deleted",
     word: "Word-Template",
     name: "Name",
+    file: "File",
+    image: "Image",
     simple: {
         action: {
             close: "Close",
@@ -40,7 +42,9 @@ const enMessages = {
             fields: {
                 id: "ID",
                 static_fields: "Constant fields",
-                json_pattern: "Dynamic fields"
+                json_pattern: "Dynamic fields",
+                label: "Field name",
+                type: "File type"
             }
         },
         reference: {

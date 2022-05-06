@@ -59,10 +59,12 @@ const dataProvider = {
         const { data } = params
 
         for (const key in data) {
-            if (key !== "pattern_file") {
-                formData.append(key, data[key])
-            } else {
+            if (key === "pattern_file") {
                 formData.append(key, data[key].rawFile)
+            } else if (key === "additional_data") {
+                formData.append(key, JSON.stringify(data[key]))
+            } else {
+                formData.append(key, data[key])
             }
         }
 

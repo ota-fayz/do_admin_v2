@@ -27,6 +27,8 @@ const ruMessages = {
     deleted: "Удалено",
     word: "Word-Шаблон",
     name: "Название",
+    file: "Файл",
+    image: "Фото",
     simple: {
         action: {
             close: "Закрыть",
@@ -44,7 +46,10 @@ const ruMessages = {
                 language: "Язык",
                 field_name: "Название поля",
                 static_fields: "Постоянные поля",
-                json_pattern: "Пользовательские поля"
+                json_pattern: "Пользовательские поля",
+                additional_data: "Дополнительная информация",
+                label: "Название поля",
+                type: "Тип файла"
             }
         },
         reference: {
