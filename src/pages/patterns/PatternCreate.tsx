@@ -46,17 +46,17 @@ const PatternCreate = ({ ...props }: any) => {
             type: translate("required")
         }
         const errors = {} as any
-        errors[adData] = []
         ;["name", "pattern_file", "language", "doc_type"].forEach((field) => {
             if (!values[field]) {
                 errors[field] = translate("required")
             }
         })
         if (Array.isArray(values[adData])) {
+            errors[adData] = []
             setArrOfFiles(values[adData])
-            values[adData].map((el: any) => {
-                if (!el) {
-                    errors[adData].push(obj)
+            values[adData].forEach((field: any, index: number) => {
+                if (!field) {
+                    errors[adData][index] = obj
                 }
             })
         }
