@@ -4,9 +4,29 @@ import {
     DeleteParams,
     GetOneParams,
     CreateParams,
-    UpdateParams
+    UpdateParams,
+    HttpError
 } from "react-admin"
 import { stringify } from "query-string"
+
+export const createHeadersFromOptions = (options: any): Headers => {
+    const requestHeaders = (options.headers ||
+        new Headers({
+            Accept: "application/json"
+        })) as Headers
+    if (
+        !requestHeaders.has("Content-Type") &&
+        !(options && (!options.method || options.method === "GET")) &&
+        !(options && options.body && options.body instanceof FormData)
+    ) {
+        requestHeaders.set("Content-Type", "application/json")
+    }
+    if (options.user && options.user.authenticated && options.user.token) {
+        requestHeaders.set("Authorization", options.user.token)
+    }
+
+    return requestHeaders
+}
 
 export const apiUrl = "https://ref-dev.polito.uz/api/"
 
@@ -15,6 +35,56 @@ const httpClient = (url: string, options: any = {}) => {
     options.user = {
         authenticated: true,
         token: `Token ${localStorage.getItem("token")}`
+    }
+
+    if (
+        url === "https://ref-dev.polito.uz/api/pattern/" &&
+        options.method === "POST"
+    ) {
+        const requestHeaders = createHeadersFromOptions(options)
+        return fetch(url, {
+            ...options,
+            headers: requestHeaders
+        })
+            .then((response) =>
+                response.text().then((text) => ({
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: response.headers,
+                    body: text
+                }))
+            )
+            .then(({ status, statusText, headers, body }) => {
+                let json
+                try {
+                    json = JSON.parse(body)
+                } catch (e) {
+                    // not json, no big deal
+                }
+                let fieldMessage = ""
+                json.field_message &&
+                    json.field_message.forEach((elem: any, index: number) => {
+                        fieldMessage += `${index + 1}. ${elem.message} \n`
+                    })
+                let plainMessage = ""
+                json.plain_message &&
+                    json.plain_message.forEach(
+                        (elem: string, index: number) => {
+                            plainMessage += `${index + 1}. ${elem} \n`
+                        }
+                    )
+                console.log(plainMessage)
+                if (status < 200 || status >= 300) {
+                    return Promise.reject(
+                        new HttpError(
+                            fieldMessage || plainMessage || statusText,
+                            status,
+                            json
+                        )
+                    )
+                }
+                return Promise.resolve({ status, headers, body, json })
+            })
     }
 
     return fetchUtils.fetchJson(url, options)
@@ -72,6 +142,13 @@ const dataProvider = {
             method: "POST",
             body: formData
         }).then(({ json }) => ({ data: { ...params.data, id: json.id } }))
+        // .catch((error) => {
+        //     return new Promise(function (resolve, reject) {
+        //         reject({
+        //             message: "Something went wrong, please try again."
+        //         })
+        //     })
+        // })
     },
 
     // create: (resource: string, params: CreateParams) =>
