@@ -1,0 +1,9 @@
+services:
+  app:
+    container_name: do-admin
+    image: ota2411/dean-office:admin-latest
+        build:
+          context: .
+          target: production
+    ports:
+      - "3000:80"
