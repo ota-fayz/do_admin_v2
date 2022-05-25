@@ -1,14 +1,16 @@
-FROM node:16-alpine AS builder
-ENV NODE_ENV production
-# Add a work directory
+#Installing dependency
+FROM node:16-alpine AS deps
+RUN mkdir /app
 WORKDIR /app
-# Cache and Install dependencies
-COPY package.json .
-COPY package-lock.json .
+COPY package.json package-lock.json ./
 RUN npm i
-# Copy app files
+
+
+#Building the source code
+FROM node:16-alpine AS builder
+WORKDIR /app
 COPY . .
-# Build the app
+COPY --from=deps /app/node_modules ./node_modules
 RUN npm run build
 
 # Bundle static assets with nginx
