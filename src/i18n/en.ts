@@ -5,6 +5,7 @@ const enMessages = {
     main: "Dashboard",
     switch: "Switch Language",
     welcome: "Welcome to the administration",
+    instruction: "Instruction how to use",
     title: "Dean's Office - Admin Panel",
     language: "Language",
     status: "Status",
