@@ -4,7 +4,7 @@ const enMessages = {
     ...englishMessages,
     main: "Dashboard",
     switch: "Switch Language",
-    welcome: "Welcome to the administration",
+    welcome: "Welcome",
     instruction: "Instruction how to use",
     title: "Dean's Office - Admin Panel",
     language: "Language",
